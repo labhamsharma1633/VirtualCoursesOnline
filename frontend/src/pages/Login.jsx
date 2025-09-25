@@ -4,10 +4,15 @@ import google from "../assets/google.jpg"
 import {IoEyeOutline} from "react-icons/io5"
 import {IoEye} from  "react-icons/io5"
 import { useNavigate } from 'react-router-dom'
-import { ClipLoader } from 'react-spinners'
+
 import { serverUrl } from '../App'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { useDispatch } from 'react-redux'
+import { setUserData } from '../redux/userSlice'
+import { ClipLoader } from 'react-spinners';
+
+
 
 function Login() {
       const[show,setShow]=useState(false);
@@ -15,12 +20,13 @@ function Login() {
       const [email,setEmail]=useState("");
       const [password,setPassword]=useState("");
       const [loading,setLoading]=useState(false);
+      const dispatch=useDispatch()
 
       const handleLogin=async()=>{
         setLoading(true)
         try{
           const result=await axios.post(serverUrl+"/api/auth/login",{email,password},{withCredentials:true})
-          console.log(result.data);
+          dispatch(setUserData(result.data))
           setLoading(false);
           toast.success("Login Successfullly");
           navigate("/")
@@ -28,7 +34,7 @@ function Login() {
         }
         catch(error){
           console.log(error);
-          setLoader(false);
+          setLoading(false);
           toast.error(error.response.data.message);
 
         }
@@ -62,7 +68,7 @@ function Login() {
   
             <div className='flex flex-col gap-1 w-[80%] items-start justify-center px-3 relative'>
               <label htmlFor="password" className='font-semibold'>Password</label>
-              <input id="password" type={show?"text":"password"}className='border-1 w-[100%] h-[35px] border-[#e7e6e6] text-[15xl] px-[20px]' placeholder='Your Password'onChange={(e)=>setPassword(e.target.value)} value={{password}} />
+              <input id="password" type={show?"text":"password"}className='border-1 w-[100%] h-[35px] border-[#e7e6e6] text-[15xl] px-[20px]' placeholder='Your Password'onChange={(e)=>setPassword(e.target.value)} value={password} />
               {!show ? <IoEyeOutline className='absolute w-[20px] h-[20px] cursor-pointer right-[5%] bottom-[10%]'
               onClick={()=>setShow(prev=>!prev)}
               />:
@@ -71,7 +77,7 @@ function Login() {
             </div>
   
             
-            <button className='w-[80%] h-[40px] bg-black text-white cursor-pointer flex items-center justify-center rounded-[5xl]' disabled={loading}onClick={handleLogin}>{loading ? <Clipboard size={30} color='white'/>:"Login"}</button>
+            <button className='w-[80%] h-[40px] bg-black text-white cursor-pointer flex items-center justify-center rounded-[5xl]' disabled={loading}onClick={handleLogin}>{loading ? <ClipLoader size={30} color='white'/>:"Login"}</button>
             <span className='text-[13px] cursor-pointer text-[#585757] '>Forget your password ?</span>
   
             <div className='w-[80%] flex items-center gap-2'>
