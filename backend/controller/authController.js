@@ -3,6 +3,9 @@ import validator from "validator";
 import bcrypt from "bcryptjs";
 import genToken from "../config/token.js";
 
+
+
+
 export const signUp=async(req,res)=>{
     try{
         const {name,email,password,role}=req.body;
@@ -63,7 +66,7 @@ export const login=async(req,res)=>{
         res.cookie("token",token,{
             httpOnly:true,
             secure:false,
-            samEsITE:"Strict",
+            sameSite:"Strict",
             maxAge:10*24*60*60*1000
         })
         return res.status(200).json(user);
