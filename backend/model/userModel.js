@@ -30,7 +30,17 @@ const userSchema=mongoose.Schema({
             ref:"Course"
 
         }
-    ]
+    ],
+    resetOtp:{
+        type:String
+    },
+    otpExpires:{
+        type:Date
+    },
+    isOtpVerifed:{
+        type:Boolean,
+        default:false
+    }
 
 },{timestamps:true})
 

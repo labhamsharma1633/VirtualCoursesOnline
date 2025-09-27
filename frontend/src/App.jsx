@@ -8,6 +8,8 @@ import {ToastContainer} from "react-toastify"
 import getCurrentUser from './customHooks/getCurrentUser'
 import { useSelector } from 'react-redux'
 import Profile from './pages/Profile'
+import ForgetPassword from './pages/ForgetPassword'
+import { Navigate } from 'react-router-dom'
 
 function App() {
   getCurrentUser()
@@ -21,6 +23,9 @@ function App() {
         <Route path='/signup' element={userData?<Signup/>:<Navigate to={"/"}/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/profile' element={userData?<Profile/>:<Navigate to={"/signup"}/>}/>
+        {/* <Route path='/forget' element={userData?<ForgetPassword/>:<Navigate to={"/forget"}/>}/> */}
+        <Route path='/forget' element={<ForgetPassword />} />
+
 
 
     </Routes>
