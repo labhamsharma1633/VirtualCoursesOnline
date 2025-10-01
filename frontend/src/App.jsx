@@ -20,7 +20,7 @@ function App() {
     <ToastContainer/>
     <Routes>
         <Route path='/' element={<Home/>}/>
-        <Route path='/signup' element={userData?<Signup/>:<Navigate to={"/"}/>}/>
+        <Route path='/signup' element={!userData?<Signup/>:<Navigate to={"/"}/>}/>
         <Route path='/login' element={<Login/>}/>
         <Route path='/profile' element={userData?<Profile/>:<Navigate to={"/signup"}/>}/>
         {/* <Route path='/forget' element={userData?<ForgetPassword/>:<Navigate to={"/forget"}/>}/> */}
