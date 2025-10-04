@@ -7,7 +7,7 @@ const isAuth=async(req,res,next)=>{
         return res.status(400).json({message:"User have no token"});
 
     }
-    let verifyToken=await jwt.verify(token,process.env.JWT_SECRET_KEY)
+    let verifyToken= jwt.verify(token,process.env.JWT_SECRET_KEY)
     if(!verifyToken){
         return res.status(400).json({message:"User does't have valid token"});
     }
@@ -26,3 +26,4 @@ const isAuth=async(req,res,next)=>{
 
 }
 export default isAuth;
+

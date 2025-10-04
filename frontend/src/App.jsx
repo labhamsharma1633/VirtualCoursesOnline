@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux'
 import Profile from './pages/Profile'
 import ForgetPassword from './pages/ForgetPassword'
 import { Navigate } from 'react-router-dom'
+import EditProfile from './pages/EditProfile'
 
 function App() {
   getCurrentUser()
@@ -25,10 +26,11 @@ function App() {
         <Route path='/profile' element={userData?<Profile/>:<Navigate to={"/signup"}/>}/>
         {/* <Route path='/forget' element={userData?<ForgetPassword/>:<Navigate to={"/forget"}/>}/> */}
         <Route path='/forget' element={<ForgetPassword />} />
+        <Route path='/editprofile' element={userData?<EditProfile/>:<Navigate to={"/signup"}/>}/>
 
 
 
-    </Routes>
+  </Routes>
     </>
   )
 }
