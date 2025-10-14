@@ -11,6 +11,8 @@ import Profile from './pages/Profile'
 import ForgetPassword from './pages/ForgetPassword'
 import { Navigate } from 'react-router-dom'
 import EditProfile from './pages/EditProfile'
+import Dashboard from './pages/Educator/Dashboard'
+import Courses from './pages/Educator/Courses'
 
 function App() {
   getCurrentUser()
@@ -27,6 +29,11 @@ function App() {
         {/* <Route path='/forget' element={userData?<ForgetPassword/>:<Navigate to={"/forget"}/>}/> */}
         <Route path='/forget' element={<ForgetPassword />} />
         <Route path='/editprofile' element={userData?<EditProfile/>:<Navigate to={"/signup"}/>}/>
+        <Route path='/dashboard' element={userData?.role==="educator"? <Dashboard/>:<Navigate to={"/signup"}/>}/>
+        <Route path='/courses' element={userData?.role==="educator"? <Courses/>:<Navigate to={"/signup"}/>}/>
+
+        
+
 
 
 
