@@ -8,8 +8,8 @@ export const createCourse=async(req,res,)=>{
         if(!title || !category){
             return res.status(400).json({message:"title or Category is required"});
         }
-        const course=await Course.create({title,description,creator:req.userId})
-        return response.status(201).json(course)
+        const course=await Course.create({title,category,creator:req.userId})
+        return res.status(201).json(course)
 
     }
     catch(error){
