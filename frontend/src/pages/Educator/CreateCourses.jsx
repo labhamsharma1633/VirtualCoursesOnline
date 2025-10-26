@@ -7,6 +7,7 @@ import { serverUrl } from '../../App';
 import { ClipLoader } from 'react-spinners';
 
 
+
 function CreateCourses() {
   const navigate=useNavigate();
   const [title,setTitle]=useState("")
@@ -23,6 +24,7 @@ function CreateCourses() {
     try{
       const result=await axios.post(serverUrl+"/api/course/create",{title,category},{withCredentials:true})
       console.log(result.data);
+      navigate("/courses")
       setLoading(false);
       toast.success("Course Created");
 
